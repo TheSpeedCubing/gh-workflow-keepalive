@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-# 讀取 .env
+YQ=/usr/local/bin/yq
+
 if [ ! -f .env ]; then
   echo ".env file not found!"
   exit 1
@@ -19,10 +20,10 @@ if [ ! -f "$CONFIG_FILE" ]; then
   exit 1
 fi
 
-REPOS=$(yq eval '.repos | keys | .[]' "$CONFIG_FILE")
+REPOS=$($YQ eval '.repos | keys | .[]' "$CONFIG_FILE")
 
 for repo in $REPOS; do
-  WORKFLOWS=$(yq eval ".repos.\"$repo\"[]" "$CONFIG_FILE")
+  WORKFLOWS=$($YQ eval ".repos.\"$repo\"[]" "$CONFIG_FILE")
   for wf in $WORKFLOWS; do
     echo "Enabling workflow $wf in repository $repo..."
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X PUT \
