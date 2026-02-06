@@ -7,8 +7,8 @@ Prevent GitHub Actions scheduled workflows from being automatically disabled due
 1. Clone this Repository
 
     ```bash
-    git clone https://github.com/TheSpeedCubing/gh-actions-keepalive.git
-    cd gh-actions-keepalive
+    git clone https://github.com/TheSpeedCubing/gh-workflow-keepalive.git
+    cd gh-workflow-keepalive
     ```
 	
 2. Update `workflows.yml` as desired
@@ -39,11 +39,12 @@ Prevent GitHub Actions scheduled workflows from being automatically disabled due
 
     ```
     # Make the script executable
-    chmod +x keepalive.sh
+    chmod +x gh-workflow-keepalive/run.sh
+    chmod +x gh-workflow-keepalive/run_and_log.sh
     
     # Run manually
-    ./keepalive.sh
+    ./run_and_logsh
     
-    # Or set up a daily cron job (UTC 16:00)
-    (crontab -l 2>/dev/null; echo "0 16 * * * cd /path/to/gh-actions-keepalive && ./keepalive.sh >> /path/to/gh-actions-keepalive/keepalive.log 2>&1") | crontab -
+    # cron
+    (crontab -l 2>/dev/null; echo "0 0 * * * /home/debian/gh-workflow-keepalive/run_and_log.sh") | crontab -
     ```
