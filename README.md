@@ -14,13 +14,13 @@ Prevent GitHub Actions scheduled workflows from being automatically disabled due
 2. Update `workflows.yml` as desired
 
     ```
-	repos:
-      your-org/your-repo:
-        - a.yml
-        - b.yml
-      another-org/another-repo:
-        - ci.yml
-	```
+    orgs:
+      - speedcubing-top
+
+    users:
+      - TheSpeedCubing
+
+    ```
 
 3. Add GitHub classic token in `.env`
 
